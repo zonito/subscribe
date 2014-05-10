@@ -1,0 +1,16 @@
+application: your-app
+version: 2
+runtime: python27
+threadsafe: true
+api_version: 1
+
+handlers:
+- url: /unsubscribe
+  script: subscribe.APPLICATION
+
+# Endpoints handler
+- url: /_ah/spi/.*
+  script: subscribe_api.APPLICATION
+
+builtins:
+- deferred: on

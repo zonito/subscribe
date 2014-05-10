@@ -1,0 +1,3 @@
+queue:
+- name: email
+  rate: 20/s
