@@ -18,12 +18,12 @@
 """Subscribe API implemented using Google Cloud Endpoints."""
 
 import base64
+import endpoints
 import json
 import os
 
 from google.appengine.api import mail
 from google.appengine.ext import deferred
-from google.appengine.ext import endpoints
 from google.appengine.ext.webapp import template
 
 from models import PrivateKeys
@@ -76,7 +76,7 @@ def send_emails(request):
 
 @endpoints.api(name='subscribe', version='v1',
                description='Subscribe API',
-               allowed_client_ids=[endpoints.API_EXPLORER_CLIENT_ID])
+               title='Subscribe Service')
 class SubscribeApi(remote.Service):
     """Class which defines subscibe API v1."""
 
@@ -94,7 +94,7 @@ class SubscribeApi(remote.Service):
             An instance of ResponseMessage containing the status of request.
         """
         if request.private_key not in PRIVATE_KEYS:
-            return ResponseMessage(success=False)
+            raise endpoints.UnauthorizedException('Unauthorize Application.')
         send_emails(request)
         return ResponseMessage(success=True)
 

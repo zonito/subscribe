@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link href="favicon.ico" rel="shortcut icon">
+        <title>Subscribe Demo</title>
+        <style>
+            body {
+                font-family: arial, sans-serif;
+                color: #333;
+            }
+            .container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            form {
+                margin: 0;
+            }
+            h2 {
+                font-weight: normal;
+                color: #000;
+            }
+            .col_100 {
+                width: 98%;
+            }
+            .form label {
+                display: inline-block;
+                padding: 0 0 4px 0;
+            }
+            input, textarea {
+                width: 95%;
+            }
+            .button {
+                border: 1px solid #D00303;
+                text-align: center;
+                text-decoration: none;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                -webkit-box-shadow: #000 0px 0px 1px;
+                -moz-box-shadow: #000 0px 0px 1px;
+                box-shadow: #000 0px 0px 1px;
+                background: #EA0000;
+                background: -webkit-gradient(linear, 0 0, 0 bottom, from(#EA0000), to(#D00303));
+                background: -webkit-linear-gradient(#EA0000, #D00303);
+                background: -moz-linear-gradient(#ea0000, #d00303);
+                background: -ms-linear-gradient(#ea0000, #d00303);
+                background: -o-linear-gradient(#ea0000, #d00303);
+                background: linear-gradient(#EA0000, #D00303);
+                color: #FFF;
+                padding: 12px 20px;
+                font-family: verdana, sans-serif;
+                text-shadow: 1px 1px 1px #D03302;
+                display: inline-block;
+            }
+            .success {
+                border: 1px solid #399F16;
+                color: #FFF;
+                background: #399F16;
+                padding: 8px 14px;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+            }
+        </style>
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </head>
+
+    <body>
+        <div class="container">
+            <form action="/demo" method="post" class="form">
+                <h2>Send email form</h2>
+                {% if response %}
+                <div class="success">
+                    <pre>
+{{response}}
+</pre>
+                </div>
+                {% endif %}
+
+                <p class="col_100">
+                    <label for="from">From:</label><br/>
+                    <input type="text" name="from" id="from" value="" required="true" />
+                </p>
+                <p class="col_100">
+                    <label for="reply">Reply To:</label><br/>
+                    <input type="text" name="reply" id="reply" value="" />
+                </p>
+                <p class="col_100">
+                    <label for="emails">To (comman separated):</label><br/>
+                    <input type="text" name="emails" id="emails" value="" required="true" />
+                </p>
+                <p class="col_100">
+                    <label for="subject">Subject:</label><br/>
+                    <input type="text" name="subject" id="subject" value="" required="true" />
+                </p>
+                <p>
+                    <label for="body">Body:</label><br/>
+                    <textarea cols="40" rows="8" name="body" id="body" required="true"></textarea>
+                </p>
+
+                <p>
+                    <label for="async"><input type="checkbox" name="async" id="async" style="width:15px" /> Asynchronous</label><br/>
+                </p>
+
+                <div>
+                    <button type="submit" class="button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
