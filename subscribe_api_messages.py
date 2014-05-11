@@ -34,6 +34,9 @@ class RequestMessage(messages.Message):
     body = messages.StringField(4, required=True)
     sender = messages.StringField(5, required=True)
     reply_to = messages.StringField(6)
+    # set as True, if in case of mass mailing.
+    # Used deferred library to do it asynchronously.
+    # ref: https://developers.google.com/appengine/articles/deferred
     async = messages.BooleanField(7, default=False)
 
 
