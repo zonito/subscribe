@@ -23,8 +23,29 @@ curl -H 'content-type:application/json' \
      http://localhost:8080/_ah/api/subscribe/v1/send
 ```
 
+## Licensing
+
+Copyright 2011 [Love Sharma][9].
+
+Project [source code][10] is available at Github. Please report bugs and file enhancement requests at the [issue tracker][11].
+
+## Why Subscribe?
+
+* Avoid handling requests from different sources. Such as Android, IOS, Javascript, etc. ![8]
+* Handles multiple applications. Just add your application's specific [private key][6]. It will handle all your unsubscriptions application wise.
+* Handles multiple sender depending on your type of mails. Add all [sender's email address][7] in your appengine application.
+* No need to handle your unsubscriptions while sending emails to your customers / users. Service already taking care of it. Append's unsubscribe link along with given body.
+
+
 [1]: https://developers.google.com/appengine/docs/python/endpoints/
 [2]: https://developers.google.com/appengine/downloads
 [3]: https://github.com/zonito/subscribe/blob/master/app.yaml
 [4]: http://localhost:8080/_ah/admin
 [5]: http://localhost:8080/_ah/api/explorer
+[6]: https://github.com/zonito/subscribe/blob/master/subscribe_api.py#L38
+[7]: https://developers.google.com/appengine/docs/python/mail/emailmessagefields
+[8]: https://developers.google.com/appengine/docs/images/endpoints.png "Endpoint Overview"
+[9]: mailto:contact@lovesharma.com
+[10]: https://github.com/zonito/subscribe
+[11]: https://github.com/zonito/subscribe/issues
+
