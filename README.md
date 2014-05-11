@@ -14,6 +14,7 @@ Subscribe service is to extract your application's email service and host it sep
    admin console (by default [localhost:8080/_ah/admin][4].)
 4. Test your Endpoints by visiting the Google APIs Explorer: 
   [localhost:8080/_ah/api/explorer][5]
+5. Play with your demo instance by visiting [localhost:8080/demo][12]
 
 ## Command line
 
@@ -50,4 +51,5 @@ Project [source code][10] is available at Github. Please report bugs and file en
 [9]: mailto:contact@lovesharma.com
 [10]: https://github.com/zonito/subscribe
 [11]: https://github.com/zonito/subscribe/issues
+[12]: http://localhost:8080/demo
 
