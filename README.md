@@ -25,7 +25,9 @@ curl -H 'content-type:application/json' \
 
 ## Licensing
 
-Copyright 2011 [Love Sharma][9].
+Subscribe is licensed under the terms of the Apache License, version 2.0.
+
+Copyright 2014 [Love Sharma][9].
 
 Project [source code][10] is available at Github. Please report bugs and file enhancement requests at the [issue tracker][11].
 
