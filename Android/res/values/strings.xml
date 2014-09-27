@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Subscribe</string>
+    <string name="id_menu_item">menu_item</string>
+    <string name="mail_sent">Mail Sent</string>
+    <string name="email_sender">sender@email.address</string>
+    <string name="private_key">your_application_specific_private_key</string>
+    <string name="placeholder_emailaddress">Email addresses</string>
+    <string name="placeholder_subject">Subject</string>
+    <string name="placeholder_body">Body</string>
+    <string name="btn_sendemail">Send Mail</string>
+
+</resources>

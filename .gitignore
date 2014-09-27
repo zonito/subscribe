@@ -1,2 +1,11 @@
+Android/.settings/
+Android/.classpath
+Android/bin/
+Android/gen/
+Android/tmp/
+Android/proguard-project.txt
+Android/local.properties
+Android/*.keystore
+
 data/
 *.pyc
