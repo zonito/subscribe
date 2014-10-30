@@ -23,6 +23,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Class defination for SubscribeAppTest
+ * 
+ * <p>
+ * Unit test class for SubscribeApp
+ * </p>
+ * 
+ * <p>
+ * These class contains three unit cases to test subscription application. The test cases covers UI testing as well as function testing.
+ * </p>
+ * 
+ * @author Ruchita Dhariya
+ *
+ */
 public class SubscribeAppTest extends ActivityInstrumentationTestCase2<SubscribeApp>{
 
 	private SubscribeApp subscribeApp;
@@ -33,18 +47,18 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 	Context context;
 	SubscribeApiMessagesResponseMessage responseMessage;
 	CountDownLatch signal = new CountDownLatch(1);
+	
 	public SubscribeAppTest() {
 		super(SubscribeApp.class);
-
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		// Create an intent to launch target Activity.
+		//Create an intent to launch target Activity
 		subscribeApp = getActivity();
-
+		//get context for the target
 		context = getInstrumentation().getTargetContext();
 		responseMessage = null;
 		email=(EditText) subscribeApp.findViewById(R.id.email);
@@ -53,15 +67,14 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 		btnSend = (Button) subscribeApp.findViewById(R.id.sendbtn);
 	}
 
-
-
 	/**
 	 * Tests the preconditions of this test fixture.
 	 */
 	@MediumTest
 	public void testPreconditions() {
-		// Start the activity under test in isolation, without values for
-		// savedInstanceState and lastNonConfigurationInstance
+		//Start the activity under test in isolation, without values for savedInstanceState and
+		//lastNonConfigurationInstance
+
 		assertNotNull("mLaunchActivity is null", getActivity());
 		assertNotNull("EmailEditText is null", email);
 		assertNotNull("subject is null", subject);
@@ -75,20 +88,17 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 	 */
 	@MediumTest
 	public void testTextView_labelText() {
-		// It is good practice to read the string from your resources in order to
-		// not break multiple tests when a string changes.
+		//It is good practice to read the string from your resources in order to not break
+		//multiple tests when a string changes.
 		final String expected_email = subscribeApp.getString(R.string.placeholder_emailaddress);
 		final String actual_email = email.getHint().toString();
 		assertEquals("Email contains wrong text", expected_email, actual_email);
-
 		final String expected_subject = subscribeApp.getString(R.string.placeholder_subject);
 		final String actual_subject = subject.getHint().toString();
 		assertEquals("Email contains wrong text", expected_subject, actual_subject);
-
 		final String expected_body = subscribeApp.getString(R.string.placeholder_body);
 		final String actual_body = body.getHint().toString();
 		assertEquals("Email contains wrong text", expected_body, actual_body);
-
 		final String expected_btnlbl = subscribeApp.getString(R.string.btn_sendemail);
 		final String actual_btnlbl = btnSend.getText().toString();
 		assertEquals("Send button label is wrong", expected_btnlbl, actual_btnlbl);
@@ -99,23 +109,21 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 	 */
 	@LargeTest
 	public void testResponse(){
-		final String expected_to_email = "love.sharma.87@gmail.com";
+		final String expected_to_email = "";
 		final String expected_subject = "Junit Test";
 		final String expected_body = "Good Luck!";
 		try {
 			runTestOnUiThread(new Runnable() {
 				public void run() {
 					new SendingAsyncTask().execute(expected_subject, expected_body, expected_to_email);
-					//Asynctask for background processing
+					// Asynctask for background processing
 				}
 			});
 			signal.await(20, TimeUnit.SECONDS);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 		assertEquals("Email Sending is fail.", Boolean.TRUE, responseMessage.getSuccess());
-
 	}
 
 	private class SendingAsyncTask extends AsyncTask <String, Void, SubscribeApiMessagesResponseMessage> {
@@ -123,42 +131,42 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 		protected SubscribeApiMessagesResponseMessage doInBackground(String...params) {
 			SubscribeApiMessagesResponseMessage response = null;
 			try {
+
 				Subscribe.Builder builder = new Subscribe.Builder(
 						AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+
 				builder.setApplicationName(context.getString(R.string.app_name));
+
 				Subscribe service = builder.build();
 				SubscribeApiMessagesRequestMessage Subscrib =
 						new SubscribeApiMessagesRequestMessage();
 
-				// Subscribe object for set message, body and email
+				//Subscribe object for set message, body and email
 				Subscrib.setBody(params[1]);
 				Subscrib.setSubject(params[0]);
 				Subscrib.setPrivateKey(context.getString(R.string.private_key));
 				Subscrib.setSender(context.getString(R.string.email_sender));
 				SubscribeApiMessagesEmailAddressMessage Email =
 						new SubscribeApiMessagesEmailAddressMessage();
-
 				// Should refer to EmailAddressMessage object in python file
 				Email.setEmailAddress(params[2]);
+
 				List <SubscribeApiMessagesEmailAddressMessage> ListofEmail =
 						new ArrayList <SubscribeApiMessagesEmailAddressMessage> ();
 				ListofEmail.add(Email);
 				Subscrib.setEmailAddresses(ListofEmail);
 				response = service.send().emails(Subscrib).execute();
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
-
 			return response;
 		}
 
 		protected void onPostExecute(SubscribeApiMessagesResponseMessage email) {
-			// Clear the progress dialog and the fields.
+			//Clear the progress dialog and the fields
 			responseMessage = email;
-			Toast.makeText(
-					context.getApplicationContext(), "" + email.getSuccess(),1000).show();
+			Toast.makeText(context.getApplicationContext(), ""+email.getSuccess(), 1000).show();										
 		}
-
 	}
 
 }
