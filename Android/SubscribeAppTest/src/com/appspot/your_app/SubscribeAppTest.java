@@ -21,8 +21,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 /**
  * Class defination for SubscribeAppTest
  * 
@@ -82,7 +80,6 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 		assertNotNull("send button is null", btnSend);
 	}
 
-
 	/**
 	 * Tests the correctness of the initial text.
 	 */
@@ -134,7 +131,6 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 
 				Subscribe.Builder builder = new Subscribe.Builder(
 						AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
-
 				builder.setApplicationName(context.getString(R.string.app_name));
 
 				Subscribe service = builder.build();
@@ -165,8 +161,6 @@ public class SubscribeAppTest extends ActivityInstrumentationTestCase2<Subscribe
 		protected void onPostExecute(SubscribeApiMessagesResponseMessage email) {
 			//Clear the progress dialog and the fields
 			responseMessage = email;
-			Toast.makeText(context.getApplicationContext(), ""+email.getSuccess(), 1000).show();										
 		}
 	}
-
 }
